@@ -1,0 +1,14 @@
+{% schema %}
+{
+  "name": "Banner 区块",
+  "settings": [
+    { "type": "text", "id": "title", "label": "标题" },
+    { "type": "image_picker", "id": "bg_image", "label": "背景图" }
+  ]
+}
+{% endschema %}
+
+<section class="banner" style="background-image:url({{ section.settings.bg_image | img_url: 'master' }})">
+  <h2>test banner</h2>
+  <p>this is a test banner</p>
+</section>
