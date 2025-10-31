@@ -1,0 +1,38 @@
+{% comment %}
+  Welcome to Shopify theme development!
+{% endcomment %}
+
+<div class="custom-content full-width">
+  <h2>Custom Content</h2>
+  <p>This is a custom content section.</p>
+  <p>It is used to display custom content in the theme.</p>
+  <p>It is used to display custom content in the theme.</p>
+</div>
+
+
+
+{% stylesheet %}
+
+ .custom-content {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+ }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Custom Content",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Custom Content",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

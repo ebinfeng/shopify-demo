@@ -1,0 +1,53 @@
+{% schema %}
+{
+  "name": "产品推荐区块",
+  "settings": [
+    { "type": "text", "id": "title", "label": "区块标题", "default": "你可能喜欢" },
+    { "type": "collection", "id": "collection", "label": "推荐集合" },
+    { "type": "range", "id": "limit", "label": "展示数量", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "color", "id": "bg_color", "label": "背景颜色", "default": "#ffffff" },
+    { "type": "checkbox", "id": "show_border", "label": "显示边框", "default": true }
+  ],
+  "presets": [{ "name": "产品推荐区块" }]
+}
+{% endschema %}
+
+<section class="product-recommend" style="background-color: {{ section.settings.bg_color }};">
+  <h2>{{ section.settings.title }}</h2>
+  {% assign coll = section.settings.collection %}
+  {% if coll and coll.products_count > 0 %}
+    <div class="product-grid">
+      {% for product in coll.products limit: section.settings.limit %}
+        <a href="{{ product.url }}" class="product-card">
+          <img src="{{ product.featured_image | img_url: '360x' }}" alt="{{ product.title }}">
+          <p>{{ product.title }}</p>
+          <p>{{ product.price | money }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>请选择一个包含商品的集合。</p>
+  {% endif %}
+</section>
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media(max-width: 768px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .product-card {
+    text-decoration: none;
+    color: #000;
+    border: {% if section.settings.show_border %}1px solid #ddd{% else %}0{% endif %};
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    background: #fff;
+  }
+  .product-card img {
+    width: 100%; height: auto;
+  }
+</style>
